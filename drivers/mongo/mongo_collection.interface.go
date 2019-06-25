@@ -1,4 +1,4 @@
-package mongoconnector
+package mongo
 
 type MongoCollection interface {
 	// Events
