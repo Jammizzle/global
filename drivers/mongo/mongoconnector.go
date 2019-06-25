@@ -18,6 +18,7 @@ var (
 	Password string = os.Getenv("MONGODB_PASSWORD")
 	Host     string = os.Getenv("MONGODB_HOST")
 	Database string = os.Getenv("MONGODB_DATABASE")
+	Port     int    = 27017
 )
 
 // Basic structure to hold the connection
@@ -29,7 +30,7 @@ type MongoConnector struct {
 func (d *MongoConnector) Connect() error {
 	var err error
 
-	dnsConnectionString := fmt.Sprintf("mongodb://%s:%s@%s:27017/%s", User, Password, Host, Database)
+	dnsConnectionString := fmt.Sprintf("mongodb://%s:%s@%s:%d/%s", User, Password, Host, Port, Database)
 
 	d.mongoClient, err = mongo.NewClient(options.Client().ApplyURI(dnsConnectionString))
 
