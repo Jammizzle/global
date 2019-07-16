@@ -9,7 +9,6 @@ import (
 
 	"github.com/elastic/go-elasticsearch/v8"
 	_ "github.com/joho/godotenv/autoload"
-	"github.com/sirupsen/logrus"
 )
 
 var (
@@ -43,13 +42,12 @@ func (e *ElasticConnector) Connect() (err error) {
 	e.Client, err = elasticsearch.NewClient(config)
 
 	if err != nil {
-		logrus.Error(err)
 		return err
 	}
 
 	res, err := e.Client.Info()
 	if res.IsError() {
-		logrus.Fatalf("Error: %s", res.String())
+		panic("Error: " + res.String())
 	}
 
 	return nil
