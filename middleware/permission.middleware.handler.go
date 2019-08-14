@@ -40,7 +40,7 @@ func init() {
 	a := mongodbadapter.NewAdapter(dnsConnectionString) // Your MongoDB URL.
 
 	var err error
-	enforcer, err = casbin.NewEnforcer("./assets/rbac_model.conf", a)
+	Enforcer, err = casbin.NewEnforcer("./assets/rbac_model.conf", a)
 	if err != nil {
 		panic(err)
 	}
@@ -92,12 +92,12 @@ func permissionCheck() gin.HandlerFunc {
 		claims := token.Claims.(*UserClaim)
 
 		// Make sure the user is added to the system
-		enforcer.AddRoleForUser(claims.Subject, claims.Role)
+		Enforcer.AddRoleForUser(claims.Subject, claims.Role)
 		// Load the policy from DB.
-		enforcer.LoadPolicy()
+		Enforcer.LoadPolicy()
 
 		// Check the permission.
-		check, err := enforcer.Enforce(claims.Subject, c.FullPath(), c.Request.Method)
+		check, err := Enforcer.Enforce(claims.Subject, c.FullPath(), c.Request.Method)
 
 		fields := logrus.WithFields(logrus.Fields{
 			"subject":   claims.Subject,
