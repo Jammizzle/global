@@ -61,7 +61,7 @@ func init() {
 
 }
 
-func permissionCheck() gin.HandlerFunc {
+func MongoAuthorizationCheck() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Get the token
 		tokenString := c.GetHeader("Authorization")
