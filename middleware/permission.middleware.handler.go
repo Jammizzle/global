@@ -19,6 +19,7 @@ import (
 var (
 	bearerRegex = regexp.MustCompile(`(?m)^[a-zA-z]+\s(.*)$`) // Bearer header filter
 	verifyKey   *rsa.PublicKey
+	Enforcer    *casbin.Enforcer
 )
 
 type UserClaim struct {
@@ -117,16 +118,5 @@ func permissionCheck() gin.HandlerFunc {
 		}
 
 		fields.Debugf("User token passed auth checks...")
-	}
-}
-
-// #
-// # Permission Routes
-// #
-
-func quickRouteLoader() {
-	routes := router.Routes()
-	for _, v := range routes {
-		enforcer.AddPolicy("user", v.Path, v.Method)
 	}
 }
