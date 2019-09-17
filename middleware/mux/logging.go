@@ -28,7 +28,7 @@ func (w *statusWriter) Write(b []byte) (int, error) {
 	return n, err
 }
 
-func loggingMiddleware(next http.Handler) http.Handler {
+func LoggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 		path := r.RequestURI
