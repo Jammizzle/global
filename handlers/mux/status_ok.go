@@ -9,7 +9,7 @@ import (
 )
 
 func StatusOK(w http.ResponseWriter, r *http.Request) {
-	if err := j.jsonResponse(w, http.StatusOK, j.jsonRes{"status": true}); err != nil {
+	if err := j.JsonResponse(w, http.StatusOK, j.JsonRes{"status": true}); err != nil {
 		logrus.Error(err)
 	}
 }
