@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/elastic/go-elasticsearch/v8"
+	"github.com/elastic/go-elasticsearch/v6"
 	_ "github.com/joho/godotenv/autoload"
 )
 
